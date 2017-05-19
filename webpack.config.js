@@ -46,7 +46,8 @@ var config = {
             '.js',
             '.jsx'
         ]
-    }
+    },
+    devtool: 'cheap-module-eval-source-map'
 }
 
 module.exports = config;

@@ -6,35 +6,49 @@ var React = require('react'),
 var Weather = React.createClass({
     getInitialState: function(){
         return{
-            location: 'this is the default state of location',
-            temp: 200
+            isLoading: false
         };
     },
 
     weatherFormSubmit: function(location){
         var weather = this;
 
+        debugger;
+
+        this.setState({
+            isLoading: true
+        });
+
         OpenWeatherMap.getTemp(location).then(function (temp) {
             weather.setState({
                 location: location,
-                temp: temp
+                temp: temp,
+                isLoading: false
             });
         }, function (err) {
+            weather.setState({
+                isLoading: false
+            });
             alert(err);
         });
-        
-        // this.setState({
-        //     location: location,
-        //     temp: 10
-        // });
     },
 
     render: function(){
+        var { isLoading, temp, location } = this.state;
+
+        function renderMessage () {
+            if (isLoading){
+                return <h3>Fetching Weather...</h3>;
+            } else if (temp && location) {
+                return <WeatherMessage location={location} temp={temp}/>;
+            }
+        };
+
         return(
             <div>
                 <h3>Weather Comp</h3>
                 <WeatherForm onFormSubmit={this.weatherFormSubmit}/>
-                <WeatherMessage location={this.state.location} temp={this.state.temp}/>
+                {renderMessage()}
             </div>
         );
     }
