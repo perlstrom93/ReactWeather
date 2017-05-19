@@ -13,8 +13,6 @@ var Weather = React.createClass({
     weatherFormSubmit: function(location){
         var weather = this;
 
-        debugger;
-
         this.setState({
             isLoading: true
         });
