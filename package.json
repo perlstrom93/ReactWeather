@@ -4,7 +4,7 @@
   "description": "Simple React App",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --hot"
+    "start": "node server.js"
   },
   "author": "Adam Perlstrom",
   "license": "MIT",
