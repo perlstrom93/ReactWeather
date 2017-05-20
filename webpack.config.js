@@ -5,7 +5,7 @@ var config = {
     entry: currentFolder + '/app/app.jsx',
 
     output: {
-        path: currentFolder,
+        path: currentFolder + '/public/',
         filename: 'index.js'
     },
 
