@@ -6,7 +6,8 @@ var React = require('react'),
 var Weather = React.createClass({
     getInitialState: function(){
         return{
-            isLoading: false
+            isLoading: false,
+            locations: []
         };
     },
 
@@ -17,10 +18,21 @@ var Weather = React.createClass({
             isLoading: true
         });
 
-        OpenWeatherMap.getTemp(location).then(function (temp) {
+        OpenWeatherMap.getInfo(location).then(function (res) {
+            var locations = [];
+
+            res.forEach((location) => {
+                var name = location.name,
+                    temp = location.main.temp;
+
+                locations.push([
+                    name,
+                    temp
+                ]);
+            })
+
             weather.setState({
-                location: location,
-                temp: temp,
+                locations: locations,
                 isLoading: false
             });
         }, function (err) {
@@ -32,14 +44,22 @@ var Weather = React.createClass({
     },
 
     render: function(){
-        var { isLoading, temp, location } = this.state;
+        var { isLoading, locations } = this.state;
 
         function renderMessage () {
             if (isLoading){
                 return <h3>Fetching Weather...</h3>;
-            } else if (temp && location) {
-                return <WeatherMessage location={location} temp={temp}/>;
+            } else if (locations) {
+                return renderLocations();
             }
+        };
+
+        function renderLocations () {
+            var allLocations = locations.map((location) => {
+                return <WeatherMessage location={location[0]} temp={location[1]}/>;
+            });
+
+            return allLocations;
         };
 
         return(
