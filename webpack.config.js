@@ -1,5 +1,6 @@
 var path = require('path'),
-    currentFolder = path.resolve('./');
+    currentFolder = path.resolve('./'),
+    webpack = require('webpack');
 
 var config = {
     entry: [
@@ -13,7 +14,10 @@ var config = {
     },
 
     plugins: [
-
+        new webpack.ProvidePlugin({
+            '$': 'jquery',
+            'jQuery': 'jquery'
+        })
     ],
 
     output: {
