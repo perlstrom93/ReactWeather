@@ -8,6 +8,14 @@ var config = {
         currentFolder + '/app/app.jsx'
     ],
 
+    externals: {
+        jquery: 'jQuery'
+    },
+
+    plugins: [
+
+    ],
+
     output: {
         path: currentFolder + '/public/',
         filename: 'index.js'
