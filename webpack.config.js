@@ -2,7 +2,11 @@ var path = require('path'),
     currentFolder = path.resolve('./');
 
 var config = {
-    entry: currentFolder + '/app/app.jsx',
+    entry: [
+        'script-loader!jquery/dist/jquery.min.js',
+        'script-loader!foundation-sites/dist/foundation.min.js',
+        currentFolder + '/app/app.jsx'
+    ],
 
     output: {
         path: currentFolder + '/public/',
