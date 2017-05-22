@@ -8,7 +8,7 @@ var React = require('react'),
 
 // Load foundation
 
-require('css-loader!foundation-sites/dist/foundation.min.css');
+require('style-loader!css-loader!foundation-sites/dist/foundation.min.css');
 $(document).foundation();
 
 ReactDOM.render(
